@@ -11,7 +11,10 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
-locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+try:
+    locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+except locale.Error:
+    locale.setlocale(locale.LC_ALL, 'C')
 
 @st.cache_data
 def carregar_dados():
