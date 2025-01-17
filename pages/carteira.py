@@ -77,8 +77,10 @@ with col2:
     pedido_selecionado = st.selectbox('Filtrar por Pedido', pedidos)
 
 with col3:
-    setores = df['Setor'].unique()
-    setores = ['Todos'] + list(setores)
+    setores_filtrados = df['Setor'].dropna() 
+    setores_filtrados = setores_filtrados[setores_filtrados != 'Entregue']
+    setores_unicos = setores_filtrados.unique()
+    setores = ['Todos'] + list(setores_unicos) 
     setor_selecionado = st.selectbox('Filtrar por Setor', setores)
 
 with col_date_filter1:
