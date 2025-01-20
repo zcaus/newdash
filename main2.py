@@ -72,18 +72,17 @@ st.markdown("""
     }
     .styled-col {
         border: 2px solid #094780;
-        background-color:rgba(9, 70, 128, 0.39);
+        background-color:rgba(9, 70, 128, 0.10);
         border-radius: 10px;
         padding: 5px; /* Reduzido para diminuir o espaço */
         margin: 5px; /* Reduzido para diminuir o espaço */
-        color: white;
+        color: black;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         min-height: 70px; /* Altura mínima para todas as colunas */
         font-size: 1em; /* Tamanho da fonte ajustado */
-        box-shadow: inset -30px -30px 45px rgba(0, 0, 0, 0.2);
     }
     .metric-container {
         display: flex;
@@ -112,7 +111,6 @@ st.markdown("""
     align-items: center;
     min-height: 150px; /* Altura mínima para todas as colunas */
     font-size: 0.9em; /* Tamanho da fonte ajustado */
-    box-shadow: inset -30px -30px 45px rgba(0, 0, 0, 0.2);
     }
     .date-filters {
         position: fixed;
@@ -248,7 +246,7 @@ def guia_dashboard():
     col1, col2 ,col3, col4, col5, col6, col7 = st.columns(7)
 
     with col1:
-            st.page_link("main.py", label="Dashboard", icon="📊")
+            st.page_link("main2.py", label="Dashboard", icon="📊")
     with col2:
             st.page_link("pages/carteira.py", label="Carteira", icon="📇")
     with col3:

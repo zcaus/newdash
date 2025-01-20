@@ -30,9 +30,9 @@ dados = st.session_state.dados
 carteira = df
 
 colunas_desejadas = [
-     'Setor', 'Ped. Cliente', 'Dt.pedido', 'Fantasia', 'Produto', 'Modelo', 
+    'Ped. Cliente', 'Dt.pedido', 'Fantasia', 'Produto', 'Modelo', 
     'Qtd.', 'Valor Unit.', 'Valor Total', 'Qtd.a produzir', 
-    'Qtd. Produzida', 'Qtd.a liberar', 'Prev.entrega', 'Dt.fat.', 'Nr.pedido'
+    'Qtd. Produzida', 'Qtd.a liberar', 'Prev.entrega', 'Dt.fat.', 'Nr.pedido', 'Setor'
 ]
 
 df = df[colunas_desejadas]
