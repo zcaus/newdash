@@ -20,6 +20,8 @@ try:
 except locale.Error:
     locale.setlocale(locale.LC_ALL, 'C')
 
+current_date = datetime.now()
+
 @st.cache_data
 def carregar_dados():
     df = pd.read_excel('planilha/controledosistema.xlsx')
@@ -425,8 +427,11 @@ def guia_dashboard():
     with col_direita:
         sub_col1, sub_col2= st.columns(2)
     
-        with sub_col1:
-            valor_total_entregues = df_filtrado[df_filtrado['Status'] == 'Entregue']['Valor Total'].sum()
+        with sub_col1:            
+            valor_total_entregues = df[
+                (pd.to_datetime(df['Dt.fat.'], errors='coerce').dt.month == current_date.month) &
+                (pd.to_datetime(df['Dt.fat.'], errors='coerce').dt.year == current_date.year)
+            ]['Valor Total'].sum()
             valor_total_entregues_formatado = f"R${valor_total_entregues:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
             st.markdown(f"""
                 <div class='styled-col'>
@@ -437,8 +442,8 @@ def guia_dashboard():
             </div>
             """, unsafe_allow_html=True)
         with sub_col2:
-            valor_total_pendencias = df_filtrado[df_filtrado['Status'] == 'Pendente']['Valor Total'].sum()
-            valor_total_atrasados = df_filtrado[df_filtrado['Status'] == 'Atrasado']['Valor Total'].sum()
+            valor_total_pendencias = carteira[carteira['Status'] == 'Pendente']['Valor Total'].sum()
+            valor_total_atrasados = carteira[carteira['Status'] == 'Atrasado']['Valor Total'].sum()
             valor_total_saldo = valor_total_pendencias + valor_total_atrasados
             valor_total_saldo_formatado = f"R${valor_total_saldo:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
             st.markdown(f"""
