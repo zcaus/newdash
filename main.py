@@ -457,7 +457,7 @@ def guia_dashboard():
        
         carteira_entregue = carteira[carteira['Status'] == 'Entregue']
 
-        carteira_entregue['Mes'] = carteira_entregue['Dt.pedido'].dt.to_period('M')
+        carteira_entregue['Mes'] = carteira_entregue['Dt.fat.'].dt.to_period('M')
 
         valor_total_por_mes = carteira_entregue.groupby('Mes')['Valor Total'].sum().reset_index()
 
