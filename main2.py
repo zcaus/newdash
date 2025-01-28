@@ -20,6 +20,8 @@ try:
 except locale.Error:
     locale.setlocale(locale.LC_ALL, 'C')
 
+current_date = datetime.now()
+
 @st.cache_data
 def carregar_dados():
     df = pd.read_excel('planilha/controledosistema.xlsx')
@@ -72,17 +74,18 @@ st.markdown("""
     }
     .styled-col {
         border: 2px solid #094780;
-        background-color:rgba(9, 70, 128, 0.10);
+        background-color:rgba(9, 70, 128, 0.39);
         border-radius: 10px;
         padding: 5px; /* Reduzido para diminuir o espaço */
         margin: 5px; /* Reduzido para diminuir o espaço */
-        color: black;
+        color: white;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         min-height: 70px; /* Altura mínima para todas as colunas */
         font-size: 1em; /* Tamanho da fonte ajustado */
+        box-shadow: inset -30px -30px 45px rgba(0, 0, 0, 0.2);
     }
     .metric-container {
         display: flex;
@@ -111,6 +114,7 @@ st.markdown("""
     align-items: center;
     min-height: 150px; /* Altura mínima para todas as colunas */
     font-size: 0.9em; /* Tamanho da fonte ajustado */
+    box-shadow: inset -30px -30px 45px rgba(0, 0, 0, 0.2);
     }
     .date-filters {
         position: fixed;
@@ -423,8 +427,11 @@ def guia_dashboard():
     with col_direita:
         sub_col1, sub_col2= st.columns(2)
     
-        with sub_col1:
-            valor_total_entregues = df_filtrado[df_filtrado['Status'] == 'Entregue']['Valor Total'].sum()
+        with sub_col1:            
+            valor_total_entregues = df[
+                (pd.to_datetime(df['Dt.fat.'], errors='coerce').dt.month == current_date.month) &
+                (pd.to_datetime(df['Dt.fat.'], errors='coerce').dt.year == current_date.year)
+            ]['Valor Total'].sum()
             valor_total_entregues_formatado = f"R${valor_total_entregues:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
             st.markdown(f"""
                 <div class='styled-col'>
@@ -435,8 +442,8 @@ def guia_dashboard():
             </div>
             """, unsafe_allow_html=True)
         with sub_col2:
-            valor_total_pendencias = df_filtrado[df_filtrado['Status'] == 'Pendente']['Valor Total'].sum()
-            valor_total_atrasados = df_filtrado[df_filtrado['Status'] == 'Atrasado']['Valor Total'].sum()
+            valor_total_pendencias = carteira[carteira['Status'] == 'Pendente']['Valor Total'].sum()
+            valor_total_atrasados = carteira[carteira['Status'] == 'Atrasado']['Valor Total'].sum()
             valor_total_saldo = valor_total_pendencias + valor_total_atrasados
             valor_total_saldo_formatado = f"R${valor_total_saldo:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
             st.markdown(f"""
@@ -450,28 +457,50 @@ def guia_dashboard():
        
         carteira_entregue = carteira[carteira['Status'] == 'Entregue']
 
-        carteira_entregue['Mes'] = carteira_entregue['Dt.pedido'].dt.to_period('M')
+        # Convert 'Dt.fat.' to datetime
+        carteira_entregue['Dt.fat.'] = pd.to_datetime(carteira_entregue['Dt.fat.'], errors='coerce')
 
-        valor_total_por_mes = carteira_entregue.groupby('Mes')['Valor Total'].sum().reset_index()
+        # Extract month and year
+        carteira_entregue['Mes'] = carteira_entregue['Dt.fat.'].dt.month
+        carteira_entregue['Ano'] = carteira_entregue['Dt.fat.'].dt.year
 
-        valor_total_por_mes['Mes'] = valor_total_por_mes['Mes'].dt.strftime('%Y-%m')
+        meses = {
+        1: 'Jan', 2: 'Fev', 3: 'Mar', 4: 'Abr',
+        5: 'Mai', 6: 'Jun', 7: 'Jul', 8: 'Ago',
+        9: 'Set', 10: 'Out', 11: 'Nov', 12: 'Dez'
+        }
 
+        carteira_entregue['Mes_Nome'] = carteira_entregue['Mes'].map(meses)
+
+       # Cria uma lista com os nomes dos meses na ordem correta
+        ordem_meses = list(meses.values())
+
+        # Group by month and year
+        valor_total_por_mes_ano = carteira_entregue.groupby(['Mes_Nome', 'Ano'])['Valor Total'].sum().reset_index()
+
+        # Ordena os dados pela ordem dos meses
+        valor_total_por_mes_ano['Mes_Nome'] = pd.Categorical(valor_total_por_mes_ano['Mes_Nome'], categories=ordem_meses, ordered=True)
+
+        # Ordena o DataFrame
+        valor_total_por_mes_ano = valor_total_por_mes_ano.sort_values(by='Mes_Nome')
+
+        # Create a bar plot with comparison
         fig_linha = px.bar(
-            valor_total_por_mes, 
-            x='Mes',  
+            valor_total_por_mes_ano, 
+            x='Mes_Nome',  
             y='Valor Total', 
-            title='Faturamento Mensal',
-            labels={'Mes': 'Mês', 'Valor Total': 'Valor Total'},
-            color='Valor Total', 
-            color_continuous_scale='Viridis',
-            hover_data={'Mes': True, 'Valor Total': True}
-        )  
+            color='Ano',
+            barmode='group',
+            title='Faturamento Mensal Comparativo',
+            labels={'Mes': 'Mês', 'Valor Total': 'Valor Total', 'Ano': 'Ano'},
+            hover_data={'Mes_Nome': True, 'Valor Total': True, 'Ano': True}
+        )
 
         fig_linha.update_layout(
             xaxis_title='Mês',
             yaxis_title='Valor Total',
-            xaxis_tickangle=0,  
-            bargap=0.2,
+            xaxis_tickangle=-45,  
+            bargap=0.2 ,
             paper_bgcolor="rgba(0, 0, 0, 0)",
             plot_bgcolor="rgba(0, 0, 0, 0)",
             height=350,
