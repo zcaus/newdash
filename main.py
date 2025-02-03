@@ -530,7 +530,7 @@ def guia_dashboard():
             ))
             fig_indicador1.update_layout(
                 margin=dict(l=10, r=10, t=10, b=10),
-                height=115
+                height=130
             )
             st.plotly_chart(fig_indicador1, use_container_width=True)
 
@@ -552,7 +552,7 @@ def guia_dashboard():
         ))
             fig_indicador2.update_layout(
             margin=dict(l=10, r=10, t=10, b=10),
-            height=115 
+            height=130
             )
             st.plotly_chart(fig_indicador2, use_container_width=True)
 
@@ -574,7 +574,7 @@ def guia_dashboard():
             ))
             fig_indicador3.update_layout(
                 margin=dict(l=10, r=10, t=10, b=10),
-                height=115 
+                height=130 
             )
             st.plotly_chart(fig_indicador3, use_container_width=True)
 
@@ -597,7 +597,7 @@ def guia_dashboard():
             ))
             fig_indicador4.update_layout(
                 margin=dict(l=10, r=10, t=10, b=10),
-                height=115 
+                height=130 
             )
             st.plotly_chart(fig_indicador4, use_container_width=True)
     
