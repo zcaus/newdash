@@ -15,6 +15,15 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
+st.markdown(
+    """
+    <style>
+        section[data-testid="stSidebar"] {display: none;}
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 try:
     locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 except locale.Error:
