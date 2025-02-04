@@ -83,27 +83,20 @@ with col_date_filter1:
 with col_date_filter2:
     data_final_filter = pd.to_datetime(st.date_input("Data Final", value=pd.to_datetime('today')))
 
-# Filtrar apenas registros com setor igual a "Separação"
 df_filtrado = df[df['Setor'] == 'Separação']
 
-# Filtrar com base no cliente selecionado
 if fantasia_selecionada != 'Todos':
     df_filtrado = df_filtrado[df_filtrado['Fantasia'] == fantasia_selecionada]
 
-# Filtrar com base no pedido selecionado
 if pedido_selecionado != 'Todos':
     df_filtrado = df_filtrado[df_filtrado['Ped. Cliente'] == pedido_selecionado]
 
-# Filtrar pelo intervalo de datas
 df_filtrado = df_filtrado[(df_filtrado['Dt.pedido'] >= data_inicial_filter) & (df_filtrado['Dt.pedido'] <= data_final_filter)]
 
-# Calcular o valor total
 valor_total = locale.format_string("%.2f", df_filtrado['Valor Total'].sum(), grouping=True)
 valor_total = f"R$ {df_filtrado['Valor Total'].sum():,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
 
-# Exibir a tabela filtrada
 st.write("Total de Itens:", len(df_filtrado))
 st.dataframe(df_filtrado)
 
-# Exibir o valor total como métrica
 st.markdown(f"<span style='font-size: 20px;'><b>Valor Total:</b> {valor_total}</span>", unsafe_allow_html=True)

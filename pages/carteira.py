@@ -94,11 +94,9 @@ df_filtrado = df
 if fantasia_selecionada != 'Todos':
     df_filtrado = df_filtrado[df_filtrado['Fantasia'] == fantasia_selecionada]
 
-# Filtrar com base no pedido selecionado
 if pedido_selecionado != 'Todos':
     df_filtrado = df_filtrado[df_filtrado['Ped. Cliente'] == pedido_selecionado]
 
-# Filtrar com base no setor selecionado
 if setor_selecionado != 'Todos':
     df_filtrado = df_filtrado[df_filtrado['Setor'] == setor_selecionado]
 
@@ -110,6 +108,5 @@ valor_total = f"R$ {df_filtrado['Valor Total'].sum():,.2f}".replace(",", "X").re
 st.write("Total de Itens:", len(df_filtrado))
 st.dataframe(df_filtrado)
 
-# Exibir o valor total como métrica
 st.markdown(f"<span style='font-size: 20px;'><b>Valor Total:</b> {valor_total}</span>", unsafe_allow_html=True)
 

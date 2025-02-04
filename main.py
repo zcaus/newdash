@@ -470,18 +470,15 @@ def guia_dashboard():
 
         df_agrupado = carteira_entregue.groupby(['Mes_Nome', 'Ano'])['Valor Total'].sum().reset_index()
 
-        # Ordenar pelo nome do mês
         ordem_meses = list(meses.values())
         df_agrupado['Mes_Nome'] = pd.Categorical(df_agrupado['Mes_Nome'], categories=ordem_meses, ordered=True)
         df_agrupado = df_agrupado.sort_values(by='Mes_Nome')
 
-        # Separar dados por ano
         dados_2024 = df_agrupado[df_agrupado['Ano'] == 2024]
         dados_2025 = df_agrupado[df_agrupado['Ano'] == 2025]
 
         fig = go.Figure()
 
-        # Gráfico de barras para 2023
         fig.add_trace(go.Bar(
             x=dados_2024["Mes_Nome"],
             y=dados_2024["Valor Total"],
@@ -489,7 +486,6 @@ def guia_dashboard():
             marker_color="royalblue"
         ))
 
-        # Gráfico de barras para 2024
         fig.add_trace(go.Bar(
             x=dados_2025["Mes_Nome"],
             y=dados_2025["Valor Total"],
@@ -497,7 +493,6 @@ def guia_dashboard():
             marker_color="red"
         ))
 
-        # Layout do gráfico
         fig.update_layout(
             title="Comparativo de Faturamento em Barras",
             xaxis_title="Meses",
@@ -507,7 +502,6 @@ def guia_dashboard():
             height=375
         )
 
-        # Exibir o gráfico
         st.plotly_chart(fig)
 
         sub_col1, sub_col2, sub_col3, sub_col4 = st.columns(4)
