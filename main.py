@@ -503,7 +503,7 @@ def guia_dashboard():
         ))
 
         fig.update_layout(
-            title="Comparativo de Faturamento em Barras",
+            title="Comparativo de Faturamento Mensal",
             xaxis_title="Meses",
             yaxis_title="Faturamento (R$)",
             barmode="group",
