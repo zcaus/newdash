@@ -612,4 +612,3 @@ if perfil_opcao == "Administrador ⚙️":
     
     if admin_opcao == "Dashboard":
         guia_dashboard()
-        
