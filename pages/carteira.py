@@ -15,6 +15,15 @@ try:
 except locale.Error:
     locale.setlocale(locale.LC_ALL, 'C')
 
+st.markdown(
+    """
+    <style>
+        section[data-testid="stSidebar"] {display: none;}
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 @st.cache_data
 def carregar_dados():
     df = pd.read_excel('planilha/controledosistema.xlsx')
@@ -45,7 +54,7 @@ exclusoes = [
 
 df = df[~df['Ped. Cliente'].isin(exclusoes)]
 
-col1, col2 ,col3, col4, col5, col6, col7 = st.columns(7)
+col1, col2 ,col3, col4, col5, col6, col7, col8 = st.columns(8)
 
 with col1:
         st.page_link("main.py", label="Dashboard", icon="📊")
@@ -61,6 +70,8 @@ with col6:
         st.page_link("pages/expedicao.py", label="Expedição", icon="🚚")
 with col7:
         st.page_link("pages/semOE.py", label="Sem OE", icon="❌")
+with col8:
+        st.page_link("pages/data.py", label="Flash", icon="📅")
 
 st.title('Carteira')
 

@@ -256,7 +256,7 @@ def guia_dashboard():
     default_start_date = pd.to_datetime('2025-01-01')
     default_end_date = pd.to_datetime('today')
 
-    col1, col2 ,col3, col4, col5, col6, col7 = st.columns(7)
+    col1, col2 ,col3, col4, col5, col6, col7, col8 = st.columns(8)
 
     with col1:
             st.page_link("main.py", label="Dashboard", icon="📊")
@@ -272,6 +272,8 @@ def guia_dashboard():
             st.page_link("pages/expedicao.py", label="Expedição", icon="🚚")
     with col7:
             st.page_link("pages/semOE.py", label="Sem OE", icon="❌")
+    with col8:
+            st.page_link("pages/data.py", label="Flash", icon="📅")
 
     col1, col2, col3, col4 = st.columns(4)
     with col1:
