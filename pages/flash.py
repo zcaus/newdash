@@ -37,7 +37,7 @@ with col6:
 with col7:
         st.page_link("pages/semOE.py", label="Sem OE", icon="❌")
 with col8:
-        st.page_link("pages/data.py", label="Flash", icon="📅")
+        st.page_link("pages/flash.py", label="Flash", icon="📅")
 
 @st.cache_data
 def carregar_dados():
@@ -46,6 +46,14 @@ def carregar_dados():
 
 # Carrega os dados
 df = carregar_dados()
+
+exclusoes = [
+    'TUMELERO', 'ESTOQUE FOX', 'TELHA 14.10.24', 'TELHA 18.10.24', 
+    'FANAN/TERUYA', 'HC FOX 11.11.24', 'TUMELEIRO 2', 
+    'AMOSTRAS', 'LOJAS 20.12.2024', 'SALDO TELHANORTE', "DISPLAY MB", "ESTOQUE 24.02", "ESTOQUE 17.02"
+]
+
+df = df[~df['Ped. Cliente'].isin(exclusoes)]
 
 # Converte a coluna de data do pedido para datetime, tratando erros
 df['Dt.pedido'] = pd.to_datetime(

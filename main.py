@@ -273,7 +273,7 @@ def guia_dashboard():
     with col7:
             st.page_link("pages/semOE.py", label="Sem OE", icon="❌")
     with col8:
-            st.page_link("pages/data.py", label="Flash", icon="📅")
+            st.page_link("pages/flash.py", label="Flash", icon="📅")
 
     col1, col2, col3, col4 = st.columns(4)
     with col1:
