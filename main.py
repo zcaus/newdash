@@ -253,9 +253,6 @@ def guia_carteira():
 
 def guia_dashboard():
 
-    default_start_date = pd.to_datetime('2025-01-01')
-    default_end_date = pd.to_datetime('today')
-
     col1, col2 ,col3, col4, col5, col6, col7, col8 = st.columns(8)
 
     with col1:
@@ -275,31 +272,14 @@ def guia_dashboard():
     with col8:
             st.page_link("pages/flash.py", label="Flash", icon="📅")
 
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3, col4, col5, col6 = st.columns(6)
     with col1:
-        date_range = st.date_input(
-            "Selecione a data",
-            value=(default_start_date, default_end_date),
-            min_value=pd.to_datetime('2020-01-01'),
-            max_value=pd.to_datetime('today')
-        )
+        data_inicial_filter = st.date_input("Data Inicial", value=pd.to_datetime('2024-12-01').date())
 
-        if date_range[0] > date_range[1]:
-            st.error("A data inicial não pode ser posterior à data final.")
-        else:
-            data_inicial_filter, data_final_filter = pd.to_datetime(date_range[0]), pd.to_datetime(date_range[1])
+    with col2:
+        data_final_filter = st.date_input("Data Final", value=pd.to_datetime('today').date())
 
-            df_filtrado = carteira[(carteira['Dt.pedido'] >= data_inicial_filter) & (carteira['Dt.pedido'] <= data_final_filter)]
-
-            if data_inicial_filter.month == data_final_filter.month and data_inicial_filter.year == data_final_filter.year:
-                mes_ano = data_inicial_filter.strftime('%m/%Y')
-                periodo = f"{mes_ano}"
-            else:
-                mes_ano_inicial = data_inicial_filter.strftime('%m/%Y')
-                mes_ano_final = data_final_filter.strftime('%m/%Y')
-                periodo = f"{mes_ano_inicial} a {mes_ano_final}"
-
-    df_filtrado = carteira[(carteira['Dt.pedido'] >= data_inicial_filter) & (carteira['Dt.pedido'] <= data_final_filter)]
+    df_filtrado = carteira[(carteira['Dt.pedido'].dt.date >= data_inicial_filter) & (carteira['Dt.pedido'].dt.date <= data_final_filter)]
 
     produto_frequencia = df_filtrado['Produto'].value_counts().reset_index()
     produto_frequencia.columns = ['Produto', 'Frequência']
@@ -327,6 +307,14 @@ def guia_dashboard():
     col_esquerda, col_direita = st.columns(2)
 
     with col_esquerda:
+        if data_inicial_filter.month == data_final_filter.month and data_inicial_filter.year == data_final_filter.year:
+            mes_ano = data_inicial_filter.strftime('%m/%Y')
+            periodo = f"{mes_ano}"
+        else:
+            mes_ano_inicial = data_inicial_filter.strftime('%m/%Y')
+            mes_ano_final = data_final_filter.strftime('%m/%Y')
+            periodo = f"{mes_ano_inicial} a {mes_ano_final}"
+
         st.markdown(f"""
             <div style='display: flex; align-items: center;'>
                 <h1 style='margin-right: 5px; margin-bottom: 0;'>📊 Estatísticas Gerais</h1>

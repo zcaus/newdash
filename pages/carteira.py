@@ -41,7 +41,7 @@ carteira = df
 colunas_desejadas = [
      'Setor', 'Ped. Cliente', 'Dt.pedido', 'Fantasia', 'Produto', 'Modelo', 
     'Qtd.', 'Valor Unit.', 'Valor Total', 'Qtd.a produzir', 
-    'Qtd. Produzida', 'Qtd.a liberar','Prev.entrega','Dt.fat.' , 'Nr.pedido'
+    'Qtd. Produzida', 'Qtd.a liberar','Prev.entrega','Dt.fat.', 'Nr.pedido'
 ]
 
 df = df[colunas_desejadas]
@@ -54,7 +54,7 @@ exclusoes = [
 
 df = df[~df['Ped. Cliente'].isin(exclusoes)]
 
-col1, col2 ,col3, col4, col5, col6, col7, col8 = st.columns(8)
+col1, col2,col3, col4, col5, col6, col7, col8 = st.columns(8)
 
 with col1:
         st.page_link("main.py", label="Dashboard", icon="📊")
@@ -75,7 +75,7 @@ with col8:
 
 st.title('Carteira')
 
-col1, col2, col3, col_date_filter1, col_date_filter2 = st.columns(5)
+col1, col2, col3, col_date_filter1, col_date_filter2, col_status_filter = st.columns(6)
 
 with col1:
     fantasias = df['Fantasia'].unique()
@@ -89,27 +89,35 @@ with col2:
 
 with col3:
     setores_filtrados = df['Setor'].dropna() 
-    setores_filtrados = setores_filtrados[setores_filtrados != 'Entregue']
+    setores_filtrados = setores_filtrados[setores_filtrados!= 'Entregue']
     setores_unicos = setores_filtrados.unique()
     setores = ['Todos'] + list(setores_unicos) 
     setor_selecionado = st.selectbox('Filtrar por Setor', setores)
 
 with col_date_filter1:
-    data_inicial_filter = pd.to_datetime(st.date_input("Data Inicial", value=pd.to_datetime('2025-01-01')))
+    data_inicial_filter = pd.to_datetime(st.date_input("Data Inicial", value=pd.to_datetime('2024-12-01')))
 
 with col_date_filter2:
     data_final_filter = pd.to_datetime(st.date_input("Data Final", value=pd.to_datetime('today')))
 
+with col_status_filter:
+    status_filtrado = st.selectbox('Filtrar por Status', ['Todos', 'Pendentes', 'Entregues'])
+
 df_filtrado = df
 
-if fantasia_selecionada != 'Todos':
+if fantasia_selecionada!= 'Todos':
     df_filtrado = df_filtrado[df_filtrado['Fantasia'] == fantasia_selecionada]
 
-if pedido_selecionado != 'Todos':
+if pedido_selecionado!= 'Todos':
     df_filtrado = df_filtrado[df_filtrado['Ped. Cliente'] == pedido_selecionado]
 
-if setor_selecionado != 'Todos':
+if setor_selecionado!= 'Todos':
     df_filtrado = df_filtrado[df_filtrado['Setor'] == setor_selecionado]
+
+if status_filtrado == 'Pendentes':
+    df_filtrado = df_filtrado[df_filtrado['Setor']!= 'Entregue']
+elif status_filtrado == 'Entregues':
+    df_filtrado = df_filtrado[df_filtrado['Setor'] == 'Entregue']
 
 df_filtrado = df_filtrado[(df_filtrado['Dt.pedido'] >= data_inicial_filter) & (df_filtrado['Dt.pedido'] <= data_final_filter)]
 
@@ -120,4 +128,3 @@ st.write("Total de Itens:", len(df_filtrado))
 st.dataframe(df_filtrado)
 
 st.markdown(f"<span style='font-size: 20px;'><b>Valor Total:</b> {valor_total}</span>", unsafe_allow_html=True)
-

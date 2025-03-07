@@ -4,7 +4,7 @@ from datetime import datetime
 
 # Define o layout da página como wide (tela inteira)
 st.set_page_config(
-    page_title="Sistema de Controle",
+    page_title="Sistema de Controle - Flash",
     page_icon="planilha/mascote_instagram-removebg-preview.png",
     layout="wide",
     initial_sidebar_state="collapsed",
