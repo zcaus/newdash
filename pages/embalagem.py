@@ -54,7 +54,7 @@ exclusoes = [
 
 df = df[~df['Ped. Cliente'].isin(exclusoes)]
 
-col1, col2 ,col3, col4, col5, col6, col7, col8 = st.columns(8)
+col1, col2 ,col3, col4, col5, col6, col7 = st.columns(7)
 
 with col1:
         st.page_link("main.py", label="Dashboard", icon="📊")
@@ -70,8 +70,6 @@ with col6:
         st.page_link("pages/expedicao.py", label="Expedição", icon="🚚")
 with col7:
         st.page_link("pages/semOE.py", label="Sem OE", icon="❌")
-with col8:
-        st.page_link("pages/flash.py", label="Flash", icon="📅")
 
 st.title('Embalagem')
 
