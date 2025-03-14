@@ -106,6 +106,29 @@ valor_total = locale.format_string("%.2f", df_filtrado['Valor Total'].sum(), gro
 valor_total = f"R$ {df_filtrado['Valor Total'].sum():,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
 
 st.write("Total de Itens:", len(df_filtrado))
-st.dataframe(df_filtrado)
+# Cria o subconjunto com as colunas desejadas
+df_subset = df_filtrado[colunas_desejadas]
+
+# Renomeia as colunas usando um dicionário
+df_subset = df_subset.rename(columns={
+    'Setor': 'Setor',
+    'Ped. Cliente': 'Pedido do Cliente',
+    'Dt.pedido': 'Data do Pedido',
+    'Fantasia': 'Cliente',
+    'Produto': 'Produto',
+    'Modelo': 'Modelo',
+    'Qtd.': 'Quantidade',
+    'Valor Unit.': 'Valor Unitário',
+    'Valor Total': 'Valor Total',
+    'Qtd.a produzir': 'Qtd a Produzir',
+    'Qtd. Produzida': 'Qtd Produzida',
+    'Qtd.a liberar': 'Qtd a Liberar',
+    'Prev.entrega': 'Previsão de Entrega',
+    'Dt.fat.': 'Data de Faturamento',
+    'Nr.pedido': 'Número do Pedido'
+})
+
+# Exibe o DataFrame renomeado
+st.dataframe(df_subset)
 
 st.markdown(f"<span style='font-size: 20px;'><b>Valor Total:</b> {valor_total}</span>", unsafe_allow_html=True)
