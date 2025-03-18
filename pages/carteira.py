@@ -2,7 +2,6 @@ import pandas as pd
 import streamlit as st
 import locale
 from datetime import datetime
-from st_aggrid import AgGrid, GridOptionsBuilder
 
 st.set_page_config(
     page_title="Sistema de Controle",
