@@ -210,7 +210,7 @@ def guia_carteira():
         setor_filter = st.selectbox("Filtrar por Setor", options=["Todos"] + [s for s in df_carteira['Setor'].unique() if not pd.isnull(s) and s!= 'Entregue'])
 
     with col_date_filter1:
-        data_inicial_filter = pd.to_datetime(st.date_input("Data Inicial", value=pd.to_datetime('2025-01-01')))
+        data_inicial_filter = pd.to_datetime(st.date_input("Data Inicial", value=pd.to_datetime('2025-04-01')))
     
     with col_date_filter2:
         data_final_filter = pd.to_datetime(st.date_input("Data Final", value=pd.to_datetime('today')))
@@ -272,7 +272,7 @@ def guia_dashboard():
 
     col1, col2, col3, col4, col5, col6 = st.columns(6)
     with col1:
-        data_inicial_filter = st.date_input("Data Inicial", value=pd.to_datetime('2024-12-01').date())
+        data_inicial_filter = st.date_input("Data Inicial", value=pd.to_datetime('2024-02-01').date())
 
     with col2:
         data_final_filter = st.date_input("Data Final", value=pd.to_datetime('today').date())
