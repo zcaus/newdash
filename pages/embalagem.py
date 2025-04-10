@@ -5,7 +5,7 @@ from datetime import datetime
 
 st.set_page_config(
     page_title="Sistema de Controle - Embalagem",
-    page_icon="planilha/mascote_instagram-removebg-preview.png",
+    page_icon="images/mascote_instagram-removebg-preview.png",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
