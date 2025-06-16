@@ -272,7 +272,7 @@ def guia_dashboard():
 
     col1, col2, col3, col4, col5, col6 = st.columns(6)
     with col1:
-        data_inicial_filter = st.date_input("Data Inicial", value=pd.to_datetime('2024-02-01').date())
+        data_inicial_filter = st.date_input("Data Inicial", value=pd.to_datetime('2025-05-01').date())
 
     with col2:
         data_final_filter = st.date_input("Data Final", value=pd.to_datetime('today').date())
@@ -286,11 +286,11 @@ def guia_dashboard():
 
     produto_frequencia = produto_frequencia.merge(produto_info, on='Produto', how='left')
 
-    total_pedidos = df_filtrado['Ped. Cliente'].nunique()
+    total_pedidos = df_filtrado.loc[df_filtrado['Setor'] != 'Entregue', 'Ped. Cliente'].nunique()
     pendente = len(df_filtrado[df_filtrado['Status'] == 'Pendente'])
     atrasado = len(df_filtrado[df_filtrado['Status'] == 'Atrasado'])
-    modelos_unicos = df_filtrado['Modelo'].nunique()
-    total_itensct = df_filtrado['Qtd.'].sum()
+    modelos_unicos = df_filtrado.loc[df_filtrado['Setor'] != 'Entregue', 'Produto'].nunique()
+    total_itensct = df_filtrado.loc[df_filtrado['Setor'] != 'Entregue', 'Qtd.'].sum()
 
     valor_total_separacao = df_filtrado[df_filtrado['Setor'] == 'Separação']['Valor Total'].sum()
     valor_total_compras = df_filtrado[df_filtrado['Setor'] == 'Compras']['Valor Total'].sum()
