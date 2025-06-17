@@ -164,12 +164,12 @@ expedicao = definir_data_e_status(expedicao)
 perfil3 = definir_data_e_status(perfil3)
 carteira = definir_data_e_status(carteira)
 
-separacao = separacao[(separacao['Ped. Cliente'] != 'TUMELERO') & (separacao['Ped. Cliente'] != 'ESTOQUE FOX') & (separacao['Ped. Cliente'] != 'TELHA 14.10.24') & (separacao['Ped. Cliente'] != 'ESTOQUE FOX') & (separacao['Ped. Cliente'] != 'TELHA 18.10.24') & (separacao['Ped. Cliente'] != 'FANAN/TERUYA') & (separacao['Ped. Cliente'] != 'HC FOX 11.11.24') & (separacao['Ped. Cliente'] != 'TUMELEIRO 2') & (separacao['Ped. Cliente'] != 'AMOSTRAS') & (separacao['Ped. Cliente'] != 'LOJAS 20.12.2024') & (separacao['Ped. Cliente'] != 'SALDO TELHANORTE')]
-compras = compras[(compras['Ped. Cliente'] != 'TUMELERO') & (compras['Ped. Cliente'] != 'ESTOQUE FOX') & (compras['Ped. Cliente'] != 'TELHA 14.10.24') & (compras['Ped. Cliente'] != 'ESTOQUE FOX') & (compras['Ped. Cliente'] != 'TELHA 18.10.24') & (compras['Ped. Cliente'] != 'FANAN/TERUYA') & (compras['Ped. Cliente'] != 'HC FOX 11.11.24') & (compras['Ped. Cliente'] != 'TUMELEIRO 2') & (compras['Ped. Cliente'] != 'AMOSTRAS') & (compras['Ped. Cliente'] != 'LOJAS 20.12.2024') & (compras['Ped. Cliente'] != 'SALDO TELHANORTE')]
-embalagem = embalagem[(embalagem['Ped. Cliente'] != 'TUMELERO') & (embalagem['Ped. Cliente'] != 'ESTOQUE FOX') & (embalagem['Ped. Cliente'] != 'TELHA 14.10.24') & (embalagem['Ped. Cliente'] != 'ESTOQUE FOX') & (embalagem['Ped. Cliente'] != 'TELHA 18.10.24') & (embalagem['Ped. Cliente'] != 'FANAN/TERUYA') & (embalagem['Ped. Cliente'] != 'HC FOX 11.11.24') & (embalagem['Ped. Cliente'] != 'TUMELEIRO 2') & (embalagem['Ped. Cliente'] != 'AMOSTRAS') & (embalagem['Ped. Cliente'] != 'LOJAS 20.12.2024') & (embalagem['Ped. Cliente'] != 'SALDO TELHANORTE')]
-expedicao = expedicao[(expedicao['Ped. Cliente'] != 'TUMELERO') & (expedicao['Ped. Cliente'] != 'ESTOQUE FOX') & (expedicao['Ped. Cliente'] != 'TELHA 14.10.24') & (expedicao['Ped. Cliente'] != 'ESTOQUE FOX') & (expedicao['Ped. Cliente'] != 'TELHA 18.10.24') & (expedicao['Ped. Cliente'] != 'FANAN/TERUYA') & (expedicao['Ped. Cliente'] != 'HC FOX 11.11.24') & (expedicao['Ped. Cliente'] != 'TUMELEIRO 2') & (expedicao['Ped. Cliente'] != 'AMOSTRAS') & (expedicao['Ped. Cliente'] != 'LOJAS 20.12.2024') & (expedicao['Ped. Cliente'] != 'SALDO TELHANORTE')]
-perfil3 = perfil3[(perfil3['Ped. Cliente'] != 'TUMELERO') & (perfil3['Ped. Cliente'] != 'ESTOQUE FOX') & (perfil3['Ped. Cliente'] != 'TELHA 14.10.24') & (perfil3['Ped. Cliente'] != 'ESTOQUE FOX') & (perfil3['Ped. Cliente'] != 'TELHA 18.10.24') & (perfil3['Ped. Cliente'] != 'FANAN/TERUYA') & (perfil3['Ped. Cliente'] != 'HC FOX 11.11.24') & (perfil3['Ped. Cliente'] != 'TUMELEIRO 2') & (perfil3['Ped. Cliente'] != 'AMOSTRAS') & (perfil3['Ped. Cliente'] != 'LOJAS 20.12.2024') & (perfil3['Ped. Cliente'] != 'SALDO TELHANORTE')]
-carteira = carteira[(carteira['Ped. Cliente'] != 'TUMELERO') & (carteira['Ped. Cliente'] != 'ESTOQUE FOX') & (carteira['Ped. Cliente'] != 'TELHA 14.10.24') & (carteira['Ped. Cliente'] != 'ESTOQUE FOX') & (carteira['Ped. Cliente'] != 'TELHA 18.10.24') & (carteira['Ped. Cliente'] != 'FANAN/TERUYA') & (carteira['Ped. Cliente'] != 'HC FOX 11.11.24') & (carteira['Ped. Cliente'] != 'TUMELEIRO 2') & (carteira['Ped. Cliente'] != 'AMOSTRAS') & (carteira['Ped. Cliente'] != 'LOJAS 20.12.2024') & (carteira['Ped. Cliente'] != 'SALDO TELHANORTE')]
+separacao = separacao[(separacao['Ped. Cliente'] != 'LOJAS 11.04') & (separacao['Ped. Cliente'] != 'LOJAS 14.06') & (separacao['Ped. Cliente'] != 'LOJAS 23.05') & (separacao['Ped. Cliente'] != 'CUMBICA 6849') & (separacao['Ped. Cliente'] != 'AMOSTRAS ROGER') & (separacao['Ped. Cliente'] != 'AMOSTRAS LITORA') & (separacao['Ped. Cliente'] != 'AMOSTRAS REINALDO')]
+compras = compras[(compras['Ped. Cliente'] != 'LOJAS 11.04') & (compras['Ped. Cliente'] != 'LOJAS 14.06') & (compras['Ped. Cliente'] != 'LOJAS 23.05') & (compras['Ped. Cliente'] != 'CUMBICA 6849') & (compras['Ped. Cliente'] != 'AMOSTRAS ROGER') & (compras['Ped. Cliente'] != 'AMOSTRAS LITORA') & (compras['Ped. Cliente'] != 'AMOSTRAS REINALDO')]
+embalagem = embalagem[(embalagem['Ped. Cliente'] != 'LOJAS 11.04') & (embalagem['Ped. Cliente'] != 'LOJAS 14.06') & (embalagem['Ped. Cliente'] != 'LOJAS 23.05') & (embalagem['Ped. Cliente'] != 'CUMBICA 6849') & (embalagem['Ped. Cliente'] != 'AMOSTRAS ROGER') & (embalagem['Ped. Cliente'] != 'AMOSTRAS LITORA') & (embalagem['Ped. Cliente'] != 'AMOSTRAS REINALDO')]
+expedicao = expedicao[(['Ped. Cliente'] != 'LOJAS 11.04') & (expedicao['Ped. Cliente'] != 'LOJAS 14.06') & (expedicao['Ped. Cliente'] != 'LOJAS 23.05') & (expedicao['Ped. Cliente'] != 'CUMBICA 6849') & (expedicao['Ped. Cliente'] != 'AMOSTRAS ROGER') & (expedicao['Ped. Cliente'] != 'AMOSTRAS LITORA') & (expedicao['Ped. Cliente'] != 'AMOSTRAS REINALDO')]
+perfil3 = perfil3[(perfil3['Ped. Cliente'] != 'LOJAS 11.04') & (perfil3['Ped. Cliente'] != 'LOJAS 14.06') & (perfil3['Ped. Cliente'] != 'LOJAS 23.05') & (perfil3['Ped. Cliente'] != 'CUMBICA 6849') & (perfil3['Ped. Cliente'] != 'AMOSTRAS ROGER') & (perfil3['Ped. Cliente'] != 'AMOSTRAS LITORA') & (perfil3['Ped. Cliente'] != 'AMOSTRAS REINALDO')]
+carteira = carteira[(carteira['Ped. Cliente'] != 'LOJAS 11.04') & (carteira['Ped. Cliente'] != 'LOJAS 14.06') & (carteira['Ped. Cliente'] != 'LOJAS 23.05') & (carteira['Ped. Cliente'] != 'CUMBICA 6849') & (carteira['Ped. Cliente'] != 'AMOSTRAS ROGER') & (carteira['Ped. Cliente'] != 'AMOSTRAS LITORA') & (carteira['Ped. Cliente'] != 'AMOSTRAS REINALDO')]
 
 separacao = separacao[separacao['Nr.pedido']!= 'nan']
 perfil2 = perfil2[perfil2['Nr.pedido']!= 'nan']
@@ -271,6 +271,7 @@ def guia_dashboard():
             st.page_link("pages/semOE.py", label="Sem OE", icon="❌")
 
     col1, col2, col3, col4, col5, col6 = st.columns(6)
+
     with col1:
         data_inicial_filter = st.date_input("Data Inicial", value=pd.to_datetime('2025-05-01').date())
 
@@ -664,10 +665,10 @@ def guia_dashboard():
 
                 colunas_final = [
                     'CLIENTE', 'PED.', 'DT', 'VALOR INICIAL', 'VALOR SALDO', '',
-                    'R$ SEPARAÇÃO', '% SEPARAÇÃO',
-                    'R$ COMPRAS', '% COMPRAS',
-                    'R$ EMBALAGEM', '% EMBALAGEM',
-                    'R$ EXPEDIÇÃO', '% EXPEDIÇÃO', '  ',
+                    'R$ SEPARAÇÃO', '%',
+                    'R$ COMPRAS', '%',
+                    'R$ EMBALAGEM', '%',
+                    'R$ EXPEDIÇÃO', '%', '  ',
                     'R$ SEM OE', '% SEM OE'
                 ]
                 for col in colunas_final:
