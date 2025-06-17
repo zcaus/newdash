@@ -591,7 +591,114 @@ def guia_dashboard():
                 height=130 
             )
             st.plotly_chart(fig_indicador4, use_container_width=True)
-    
+
+            pendencias_df = carteira[(carteira['Status'] == 'Pendente') | (carteira['Status'] == 'Atrasado')].copy()
+
+    colunas_remover = [
+        'Valor Unit.', 'Qtd.a produzir', 'Qtd. Produzida', 'Qtd.a liberar',
+        'Prev.entrega', 'Dt.fat.',
+    ]
+    pendencias_df = pendencias_df.drop(columns=[col for col in colunas_remover if col in pendencias_df.columns])
+
+    if 'Dt.pedido' in pendencias_df.columns:
+        pendencias_df['Dt.pedido'] = pd.to_datetime(
+            pendencias_df['Dt.pedido'], errors='coerce'
+        )
+
+    valor_inicial_dict = carteira.groupby('Ped. Cliente')['Valor Total'].sum().to_dict()
+    valor_saldo_dict = pendencias_df.groupby('Ped. Cliente')['Valor Total'].sum().to_dict()
+    pendencias_df['VALOR INICIAL'] = pendencias_df['Ped. Cliente'].map(valor_inicial_dict)
+    pendencias_df['VALOR SALDO'] = pendencias_df['Ped. Cliente'].map(valor_saldo_dict)
+
+    if not pendencias_df.empty:
+        def gerar_excel_pendencias(df):
+            buffer = BytesIO()
+            with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
+                # Aba 1: Pendências
+                df.to_excel(writer, index=False, sheet_name='LISTA CORRIDA')
+                workbook  = writer.book
+                worksheet = writer.sheets['LISTA CORRIDA']
+                # Formatar coluna Dt.pedido como data dd/mm/yyyy no Excel
+                if 'Dt.pedido' in df.columns:
+                    date_format = workbook.add_format({'num_format': 'dd/mm/yyyy'})
+                    col_idx = df.columns.get_loc('Dt.pedido')
+                    worksheet.set_column(col_idx, col_idx, 12, date_format)
+
+                setores = ['Separação', 'Compras', 'Embalagem', 'Expedição', 'Sem OE']
+
+                mapa_pivot = df.pivot_table(
+                    index=['Fantasia', 'Ped. Cliente', 'Dt.pedido', 'VALOR INICIAL', 'VALOR SALDO'],
+                    columns='Setor',
+                    values='Valor Total',
+                    aggfunc='sum',
+                    fill_value=0
+                ).reset_index()
+
+                for setor in setores:
+                    if setor not in mapa_pivot.columns:
+                        mapa_pivot[setor] = 0
+
+                for setor in setores:
+                    valor_col = setor
+                    perc_col = f'% {setor.upper()}'
+                    mapa_pivot[perc_col] = (mapa_pivot[valor_col] / mapa_pivot['VALOR INICIAL']).replace([float('inf'), -float('inf')], 0).fillna(0).map(lambda x: f"{x:.0%}")
+
+                mapa_pivot = mapa_pivot.rename(columns={
+                    'Fantasia': 'CLIENTE',
+                    'Ped. Cliente': 'PED.',
+                    'Dt.pedido': 'DT',
+                    'Separação': 'R$ SEPARAÇÃO',
+                    'Compras': 'R$ COMPRAS',
+                    'Embalagem': 'R$ EMBALAGEM',
+                    'Expedição': 'R$ EXPEDIÇÃO',
+                    'Sem OE': 'R$ SEM OE',
+                    '% SEPARAÇÃO': '% SEPARAÇÃO',
+                    '% COMPRAS': '% COMPRAS',
+                    '% EMBALAGEM': '% EMBALAGEM',
+                    '% EXPEDIÇÃO': '% EXPEDIÇÃO',
+                    '% SEM OE': '% SEM OE'
+                })
+
+                mapa_pivot[''] = ''
+                mapa_pivot['  '] = ''  
+
+                colunas_final = [
+                    'CLIENTE', 'PED.', 'DT', 'VALOR INICIAL', 'VALOR SALDO', '',
+                    'R$ SEPARAÇÃO', '% SEPARAÇÃO',
+                    'R$ COMPRAS', '% COMPRAS',
+                    'R$ EMBALAGEM', '% EMBALAGEM',
+                    'R$ EXPEDIÇÃO', '% EXPEDIÇÃO', '  ',
+                    'R$ SEM OE', '% SEM OE'
+                ]
+                for col in colunas_final:
+                    if col not in mapa_pivot.columns:
+                        mapa_pivot[col] = 0 if 'R$' in col or 'VALOR' in col else ''
+
+                mapa_pivot = mapa_pivot[colunas_final]
+
+                # Escreve a segunda aba
+                mapa_pivot.to_excel(writer, index=False, sheet_name='CARTEIRA')
+
+                # Formatar coluna DT como data dd/mm/yyyy na segunda aba
+                worksheet2 = writer.sheets['CARTEIRA']
+                if 'DT' in mapa_pivot.columns:
+                    col_idx2 = mapa_pivot.columns.get_loc('DT')
+                    date_format = workbook.add_format({'num_format': 'dd/mm/yyyy'})
+                    worksheet2.set_column(col_idx2, col_idx2, 12, date_format)
+
+            buffer.seek(0)
+            return buffer
+
+        excel_pendencias = gerar_excel_pendencias(pendencias_df)
+
+        st.download_button(
+            label="Exportar Relatório de Pendências",
+            data=excel_pendencias,
+            file_name="relatorio_pendencias.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
+    else:
+        st.info("Nenhuma pendência encontrada para exportação.")
         
 perfil_opcao = ("Administrador ⚙️")
 
