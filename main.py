@@ -164,12 +164,12 @@ expedicao = definir_data_e_status(expedicao)
 perfil3 = definir_data_e_status(perfil3)
 carteira = definir_data_e_status(carteira)
 
-separacao = separacao[(separacao['Ped. Cliente'] != 'LOJAS 11.04') & (separacao['Ped. Cliente'] != 'LOJAS 14.06') & (separacao['Ped. Cliente'] != 'LOJAS 23.05') & (separacao['Ped. Cliente'] != 'CUMBICA 6849') & (separacao['Ped. Cliente'] != 'AMOSTRAS ROGER') & (separacao['Ped. Cliente'] != 'AMOSTRAS LITORA') & (separacao['Ped. Cliente'] != 'AMOSTRAS REINALDO')]
-compras = compras[(compras['Ped. Cliente'] != 'LOJAS 11.04') & (compras['Ped. Cliente'] != 'LOJAS 14.06') & (compras['Ped. Cliente'] != 'LOJAS 23.05') & (compras['Ped. Cliente'] != 'CUMBICA 6849') & (compras['Ped. Cliente'] != 'AMOSTRAS ROGER') & (compras['Ped. Cliente'] != 'AMOSTRAS LITORA') & (compras['Ped. Cliente'] != 'AMOSTRAS REINALDO')]
-embalagem = embalagem[(embalagem['Ped. Cliente'] != 'LOJAS 11.04') & (embalagem['Ped. Cliente'] != 'LOJAS 14.06') & (embalagem['Ped. Cliente'] != 'LOJAS 23.05') & (embalagem['Ped. Cliente'] != 'CUMBICA 6849') & (embalagem['Ped. Cliente'] != 'AMOSTRAS ROGER') & (embalagem['Ped. Cliente'] != 'AMOSTRAS LITORA') & (embalagem['Ped. Cliente'] != 'AMOSTRAS REINALDO')]
-expedicao = expedicao[(['Ped. Cliente'] != 'LOJAS 11.04') & (expedicao['Ped. Cliente'] != 'LOJAS 14.06') & (expedicao['Ped. Cliente'] != 'LOJAS 23.05') & (expedicao['Ped. Cliente'] != 'CUMBICA 6849') & (expedicao['Ped. Cliente'] != 'AMOSTRAS ROGER') & (expedicao['Ped. Cliente'] != 'AMOSTRAS LITORA') & (expedicao['Ped. Cliente'] != 'AMOSTRAS REINALDO')]
-perfil3 = perfil3[(perfil3['Ped. Cliente'] != 'LOJAS 11.04') & (perfil3['Ped. Cliente'] != 'LOJAS 14.06') & (perfil3['Ped. Cliente'] != 'LOJAS 23.05') & (perfil3['Ped. Cliente'] != 'CUMBICA 6849') & (perfil3['Ped. Cliente'] != 'AMOSTRAS ROGER') & (perfil3['Ped. Cliente'] != 'AMOSTRAS LITORA') & (perfil3['Ped. Cliente'] != 'AMOSTRAS REINALDO')]
-carteira = carteira[(carteira['Ped. Cliente'] != 'LOJAS 11.04') & (carteira['Ped. Cliente'] != 'LOJAS 14.06') & (carteira['Ped. Cliente'] != 'LOJAS 23.05') & (carteira['Ped. Cliente'] != 'CUMBICA 6849') & (carteira['Ped. Cliente'] != 'AMOSTRAS ROGER') & (carteira['Ped. Cliente'] != 'AMOSTRAS LITORA') & (carteira['Ped. Cliente'] != 'AMOSTRAS REINALDO')]
+separacao = separacao[(separacao['Ped. Cliente'] != 'LOJAS 11.04') & (separacao['Ped. Cliente'] != 'LOJAS 14.06') & (separacao['Ped. Cliente'] != 'LOJAS 23.05') & (separacao['Ped. Cliente'] != 'CUMBICA 6849') & (separacao['Ped. Cliente'] != 'AMOSTRA ROGER') & (separacao['Ped. Cliente'] != 'AMOSTRAS LITORA') & (separacao['Ped. Cliente'] != 'AMOSTRAS REINALDO') & (separacao['Ped. Cliente'] != '202543')]
+compras = compras[(compras['Ped. Cliente'] != 'LOJAS 11.04') & (compras['Ped. Cliente'] != 'LOJAS 14.06') & (compras['Ped. Cliente'] != 'LOJAS 23.05') & (compras['Ped. Cliente'] != 'CUMBICA 6849') & (compras['Ped. Cliente'] != 'AMOSTRA ROGER') & (compras['Ped. Cliente'] != 'AMOSTRAS LITORA') & (compras['Ped. Cliente'] != 'AMOSTRAS REINALDO') & (compras['Ped. Cliente'] != '202543')]
+embalagem = embalagem[(embalagem['Ped. Cliente'] != 'LOJAS 11.04') & (embalagem['Ped. Cliente'] != 'LOJAS 14.06') & (embalagem['Ped. Cliente'] != 'LOJAS 23.05') & (embalagem['Ped. Cliente'] != 'CUMBICA 6849') & (embalagem['Ped. Cliente'] != 'AMOSTRA ROGER') & (embalagem['Ped. Cliente'] != 'AMOSTRAS LITORA') & (embalagem['Ped. Cliente'] != 'AMOSTRAS REINALDO') & (embalagem['Ped. Cliente'] != '202543')]
+expedicao = expedicao[(['Ped. Cliente'] != 'LOJAS 11.04') & (expedicao['Ped. Cliente'] != 'LOJAS 14.06') & (expedicao['Ped. Cliente'] != 'LOJAS 23.05') & (expedicao['Ped. Cliente'] != 'CUMBICA 6849') & (expedicao['Ped. Cliente'] != 'AMOSTRA ROGER') & (expedicao['Ped. Cliente'] != 'AMOSTRAS LITORA') & (expedicao['Ped. Cliente'] != 'AMOSTRAS REINALDO') & (expedicao['Ped. Cliente'] != '202543')]
+perfil3 = perfil3[(perfil3['Ped. Cliente'] != 'LOJAS 11.04') & (perfil3['Ped. Cliente'] != 'LOJAS 14.06') & (perfil3['Ped. Cliente'] != 'LOJAS 23.05') & (perfil3['Ped. Cliente'] != 'CUMBICA 6849') & (perfil3['Ped. Cliente'] != 'AMOSTRA ROGER') & (perfil3['Ped. Cliente'] != 'AMOSTRAS LITORA') & (perfil3['Ped. Cliente'] != 'AMOSTRAS REINALDO') & (perfil3['Ped. Cliente'] != '202543')]
+carteira = carteira[(carteira['Ped. Cliente'] != 'LOJAS 11.04') & (carteira['Ped. Cliente'] != 'LOJAS 14.06') & (carteira['Ped. Cliente'] != 'LOJAS 23.05') & (carteira['Ped. Cliente'] != 'CUMBICA 6849') & (carteira['Ped. Cliente'] != 'AMOSTRA ROGER') & (carteira['Ped. Cliente'] != 'AMOSTRAS LITORA') & (carteira['Ped. Cliente'] != 'AMOSTRAS REINALDO') & (carteira['Ped. Cliente'] != '202543')]
 
 separacao = separacao[separacao['Nr.pedido']!= 'nan']
 perfil2 = perfil2[perfil2['Nr.pedido']!= 'nan']
@@ -615,11 +615,9 @@ def guia_dashboard():
         def gerar_excel_pendencias(df):
             buffer = BytesIO()
             with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
-                # Aba 1: Pendências
                 df.to_excel(writer, index=False, sheet_name='LISTA CORRIDA')
                 workbook  = writer.book
                 worksheet = writer.sheets['LISTA CORRIDA']
-                # Formatar coluna Dt.pedido como data dd/mm/yyyy no Excel
                 if 'Dt.pedido' in df.columns:
                     date_format = workbook.add_format({'num_format': 'dd/mm/yyyy'})
                     col_idx = df.columns.get_loc('Dt.pedido')
@@ -692,10 +690,13 @@ def guia_dashboard():
 
         excel_pendencias = gerar_excel_pendencias(pendencias_df)
 
+        hoje = datetime.now()
+        nome_arquivo = f"CARTEIRA FOXMIX {hoje.day:02d}.{hoje.month:02d}.xlsx"
+
         st.download_button(
             label="Exportar Relatório de Pendências",
             data=excel_pendencias,
-            file_name="relatorio_pendencias.xlsx",
+            file_name=nome_arquivo,
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
     else:
